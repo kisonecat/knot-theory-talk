@@ -5,7 +5,6 @@
 
 %\includeonlyframes{current}
 
-
 % remove all navigation symbols
 \setbeamertemplate{navigation symbols}{}
 
@@ -15,6 +14,8 @@
 
 % ensure plain white background
 \setbeamertemplate{background canvas}{\color{white}\rule{\paperwidth}{\paperheight}}
+
+\setbeamercovered{transparent}
 
 \usepackage{tikz}
 \usetikzlibrary{knots,hobby,decorations.markings}
@@ -279,7 +280,7 @@ every trefoil component/.style={ultra thick, draw, line width=5pt},
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Reidemeister Move II}
-page
+
 \newcommand{\RIIa}{\tikz[knot]{\draw[looseness=2.3] (-.5,-.5) to[out=0, in=0] (-.5,.5); \draw[looseness=2.3, overcross=black] (.5,-.5) to[out=180, in=180] (.5,.5);}}
   \newcommand{\RIIb}{\tikz[knot]{\draw[looseness=1.4] (-.5,-.5) to[out=0, in=0] (-.5,.5);\draw[looseness=1.4] (.5,.5) to[out=180,in=180] (.5,-.5);}}
   \newcommand{\RIIc}{\tikz[knot]{\draw[looseness=2.3] (.5,-.5) to[out=180,
@@ -958,7 +959,7 @@ page
     \scalebox{0.6}{\rotategeneric} \raisebox{0.4in}{and} \scalebox{0.6}{\twistgeneric}
   \end{center}
 
-  We can record a sequence of operations as a string of $R$s and $T$s.
+  \pause We can record a sequence of operations as a string of $R$s and $T$s.
 
   \vfill
   
@@ -976,7 +977,7 @@ page
                                     &= T(\inlinetangle{\tanglerotate{\tangleone}}) \\
                                     &= \inlinetangle{\tangletwist{\tanglerotate{\tangleone}}} = \inlinetangle{\tanglezero}.
   \end{align*}}}
-  
+
 \pause But this doesn't mean that $TRT(x) = x$.
 
 \end{frame}
@@ -1015,24 +1016,24 @@ page
 
 \begin{frame}
   \Large
-  
+
   With this dictionary, \\
    \quad $T(x) = x + 1$ and $T(\inlinetangle{\tanglezero}) = \inlinetangle{\tangleone}$, \\
    and so \\
    \quad the role of ``one'' is played by $\inlinetangle{\tangleone}$.
 
-   Similarly, $T(1) = 2$, and $T(\inlinetangle{\tangleone}) = \inlinetangle{\tangletwo}$, \\
-   and so \\
-   \quad the role of ``two'' is played by $\inlinetangle{\tangletwo}$.
-   
-  
+   \pause Similarly, $T(1) = 2$, and $T(\inlinetangle{\tangleone}) = \inlinetangle{\tangletwo}$, \\
+   \pause and so \\
+   \quad the role of ``two'' is played by $\inlinetangle{\tangletwo}$, and\\
+   \pause\quad the role of ``three'' is played by $\inlinetangle{\tangletwist{\tangletwo}}$.
+
 \end{frame}
 
 \againframe{trtzero}
 
 \begin{frame}
   \Large
-  
+
   With our dictionary, \\
   \quad $T(x) = x + 1$ and $R(x) = -1/x$, \\
   we have
@@ -1099,8 +1100,10 @@ page
   \Large
   
   \begin{itemize}
-  \item Knots are closed curves in space.
-  \item By tricoloring, not every knot is the unknot.
+  \item Knots are closed curves in space, \\
+    \quad related by Reidemeister moves.
+  \item By considering ``tricoloring'' we see \\
+    \quad not every knot is the unknot.
   \item Geometry and algebra are deeply linked.
   \end{itemize}
 \end{frame}
