@@ -3,6 +3,9 @@
 \usepackage[export]{adjustbox} % allows valign option
 \usepackage{mathtools} % for xmapsto
 
+%\includeonlyframes{current}
+
+
 % remove all navigation symbols
 \setbeamertemplate{navigation symbols}{}
 
@@ -125,6 +128,21 @@
   \end{tikzpicture}
 }
 
+\newcommand{\inlinetangle}[1]{%
+  \raisebox{-9pt}{%
+  \scalebox{0.25}{%
+  \begin{tikzpicture}[line width=2.5pt]
+    #1
+    
+    \draw (-1,-1) -- (-1.5,-1.5);
+    \draw ( 1,-1) -- ( 1.5,-1.5);
+    \draw (-1, 1) -- (-1.5, 1.5);
+    \draw ( 1, 1) -- ( 1.5, 1.5);
+    
+    \draw[dotted,line width=1.2pt] (0,0) circle (2.12132034355964);
+  \end{tikzpicture}
+}}}
+
 \begin{document}
 
 \frame{\titlepage}
@@ -142,6 +160,7 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Overview}
   \Large
   
   \begin{itemize}
@@ -260,7 +279,7 @@ every trefoil component/.style={ultra thick, draw, line width=5pt},
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Reidemeister Move II}
-
+page
 \newcommand{\RIIa}{\tikz[knot]{\draw[looseness=2.3] (-.5,-.5) to[out=0, in=0] (-.5,.5); \draw[looseness=2.3, overcross=black] (.5,-.5) to[out=180, in=180] (.5,.5);}}
   \newcommand{\RIIb}{\tikz[knot]{\draw[looseness=1.4] (-.5,-.5) to[out=0, in=0] (-.5,.5);\draw[looseness=1.4] (.5,.5) to[out=180,in=180] (.5,-.5);}}
   \newcommand{\RIIc}{\tikz[knot]{\draw[looseness=2.3] (.5,-.5) to[out=180,
@@ -940,24 +959,182 @@ every trefoil component/.style={ultra thick, draw, line width=5pt},
   \end{center}
 
   We can record a sequence of operations as a string of $R$s and $T$s.
-\end{frame}
+
+  \vfill
   
+  For example, $TTRTRTT$ or $TTTRTRTTRTT$.
+\end{frame}
+
+\begin{frame}[label=trtzero]
+  \frametitle{Algebra on Pictures}
+  
+  \Large
+
+  \scalebox{1.4}{\parbox{0.6\paperwidth}{%
+  \begin{align*}
+    TRT(\inlinetangle{\tanglezero}) &= TR(\inlinetangle{\tangleone}) \\
+                                    &= T(\inlinetangle{\tanglerotate{\tangleone}}) \\
+                                    &= \inlinetangle{\tangletwist{\tanglerotate{\tangleone}}} = \inlinetangle{\tanglezero}.
+  \end{align*}}}
+  
+\pause But this doesn't mean that $TRT(x) = x$.
+
+\end{frame}
+
+\newcommand{\tangletwo}{\tangletwist{\tangleone}}
+
+\begin{frame}[label=trtone]
+  \frametitle{Algebra on Pictures}
+  
+  \Large
+
+  \scalebox{1.4}{\parbox{0.6\paperwidth}{%
+  \begin{align*}
+    TRT(\inlinetangle{\tangleone}) &= TR(\inlinetangle{\tangletwo}) \\
+                                    &= T(\inlinetangle{\tanglerotate{\tangletwo}}) \\
+                                    &= \inlinetangle{\tangletwist{\tanglerotate{\tangletwo}}} \neq \inlinetangle{\tangleone},
+  \end{align*}}}
+
+\pause even though $TRT(\inlinetangle{\tanglezero}) = \inlinetangle{\tanglezero}$.
+
+\end{frame}
+
 \begin{frame}
-    \begin{tikzpicture}[line width=1pt]
+  \frametitle{A dictionary between geometry and algebra}
 
-      % \tangletwist{\tanglerotate{\tangletwist{\tangletwist{\tangleT}}}}
-      \tangletwist{\tangletwist{\tangleone}}
-      %\tangletwist{\tangleT}
-    
-      \draw (-1,-1) -- (-1.5,-1.5);
-      \draw ( 1,-1) -- ( 1.5,-1.5);
-      \draw (-1, 1) -- (-1.5, 1.5);
-      \draw ( 1, 1) -- ( 1.5, 1.5);
-
-  \draw[dotted] (0,0) circle (2.12132034355964);
-  
-\end{tikzpicture}
+  \Large
+  \begin{center}
+  \begin{tabular}{c|c}
+    \scalebox{0.5}{\twistgeneric} & \raisebox{0.38in}{$x \xmapsto{T} x + 1$} \\
+    \scalebox{0.5}{\rotategeneric} & \raisebox{0.38in}{$x \xmapsto{R} -1/x$} \\
+    \inlinetangle{\tanglezero} & {$0$, the number zero.} \\
+  \end{tabular}
+\end{center}
 
 \end{frame}
 
+\begin{frame}
+  \Large
+  
+  With this dictionary, \\
+   \quad $T(x) = x + 1$ and $T(\inlinetangle{\tanglezero}) = \inlinetangle{\tangleone}$, \\
+   and so \\
+   \quad the role of ``one'' is played by $\inlinetangle{\tangleone}$.
+
+   Similarly, $T(1) = 2$, and $T(\inlinetangle{\tangleone}) = \inlinetangle{\tangletwo}$, \\
+   and so \\
+   \quad the role of ``two'' is played by $\inlinetangle{\tangletwo}$.
+   
+  
+\end{frame}
+
+\againframe{trtzero}
+
+\begin{frame}
+  \Large
+  
+  With our dictionary, \\
+  \quad $T(x) = x + 1$ and $R(x) = -1/x$, \\
+  we have
+  \begin{align*}
+    TRT(0) &= TR(0 + 1) = TR(1)\\
+           &= T(-1/1) = T(-1)\\
+           &= -1 + 1 = 0,
+  \end{align*}
+  just like $TRT(\inlinetangle{\tanglezero}) = \inlinetangle{\tanglezero}$.
+\end{frame}
+
+\againframe{trtone}
+
+\begin{frame}
+  \Large
+  
+  But $TRT(\inlinetangle{\tangleone}) \neq \inlinetangle{\tangleone}$, and with our dictionary,\\
+  \quad $T(x) = x + 1$ and $R(x) = -1/x$, \\
+  we similarly see
+  \begin{align*}
+    TRT(1) &= TR(1 + 1) = TR(2)\\
+           &= T(-1/2)\\
+           &= -1/2 + 1 = 1/2 \neq 1,
+  \end{align*}
+  even through $TRT(0) = 0$.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Divide by zero?}
+  
+  \Large
+
+  $R(\inlinetangle{\tanglezero}) = \inlinetangle{\tangleinfty}$ and $T(\inlinetangle{\tangleinfty}) = \inlinetangle{\tangletwist{\tangleinfty}} = \inlinetangle{\tangleinfty}$.
+
+  In the dictionary, $R(x) = -1/x$, \\
+  \quad so $R(0)$ is \ldots maybe ``$\infty$,'' \\
+  \quad and ``$\infty + 1 = \infty$,'' \\
+  just like $T(\infty) = \infty$.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Swap-and-negate, add}
+  \Large
+  
+  $R(a/b) = -b/a$ and $T(a/b) = (a+b)/b$.
+
+  \vspace{0.25in}
+
+  Reducing fractions \\
+  \quad can be turned into a video game.
+
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=0.25cm,anchor=south east] at (current page.south east) {\includegraphics[width=4cm]{qr-sl2z.pdf}};
+   \end{tikzpicture}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Underview}
+  \Large
+  
+  \begin{itemize}
+  \item Knots are closed curves in space.
+  \item By tricoloring, not every knot is the unknot.
+  \item Geometry and algebra are deeply linked.
+  \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THANK YOU
+ \begin{frame}
+   \vfill
+   \begin{center}
+   \Huge
+    \scalebox{1.5}{\textbf{Thank You}}\\[1.5ex]
+    \large
+    \vspace{1ex}
+    \texttt{https://github.com/kisonecat/knot-theory-talk}
+   \end{center}
+   \vfill
+   \vfill
+   \Large
+   
+   Jim Fowler $\langle$\texttt{fowler@math.osu.edu}$\rangle$ \\
+   
+   \texttt{@kisonecat}
+     
+ \end{frame}
+
+ \begin{frame}
+   \begin{tikzpicture}[remember picture,overlay]
+     \node[anchor=north west] at (current page.north west) {\Large Cats Love YouTube!};
+     \node[anchor=center] at (current page.center)
+     {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{cats-love-youtube.jpg}};
+     \node[anchor=south west] at (current page.south west) {\large \texttt{https://www.youtube.com/kisonecat}};
+     \node[xshift=0.25cm,anchor=south east] at (current page.south east) {\includegraphics[width=4cm]{qr-youtube.pdf}};
+   \end{tikzpicture}
+ \end{frame}
+ 
 \end{document}
